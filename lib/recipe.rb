@@ -25,4 +25,14 @@ class Recipe
       amount * ingredient.calories
     end
   end
+
+  def ingredient_summary
+    summary = @ingredients_required.sort_by do |ingredient, amount|
+      ingredient.calories * amount
+    end.reverse
+    summary.map! do |ingredient,amount|
+      {ingredient: ingredient.name,
+       amount: "#{amount} #{ingredient.unit}"}
+    end
+  end
 end
